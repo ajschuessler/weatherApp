@@ -10,7 +10,8 @@ class App extends React.Component {
         super(props);
 
         this.state = {
-            currentPosition: undefined,
+            currentLatitude: 'NA',
+            currentLongitude: 'NA',
             currentCityTemp: 'NA',
             currentCityPressure: 'NA',
             currentCityHumidity: 'NA'
@@ -24,7 +25,8 @@ class App extends React.Component {
     getUserLocation() {
         navigator.geolocation.getCurrentPosition(position => {
             this.setState({
-                currentPosition: position
+                currentLatitude: position.coords.latitude,
+                currentLongitude: position.coords.longitude
             })
         }, error => {
             console.log(error)
@@ -78,8 +80,14 @@ class App extends React.Component {
     render() {
         return (
             <div>
-                <WeatherByCitySection getCityWeatherDataByCityName={this.getCityWeatherDataByCityName} getCityWeatherDataByCityCoordinates={this.getCityWeatherDataByCityCoordinates} currentCityTemp={this.state.currentCityTemp} currentCityPressure={this.state.currentCityPressure} currentCityHumidity={this.state.currentCityHumidity}/>
-                
+                <WeatherByCitySection 
+                currentLatitude={this.state.currentLatitude}
+                currentLongitude={this.state.currentLongitude} 
+                getCityWeatherDataByCityName={this.getCityWeatherDataByCityName} 
+                getCityWeatherDataByCityCoordinates={this.getCityWeatherDataByCityCoordinates} 
+                currentCityTemp={this.state.currentCityTemp} 
+                currentCityPressure={this.state.currentCityPressure} 
+                currentCityHumidity={this.state.currentCityHumidity}/>
             </div>
         )
     }
