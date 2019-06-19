@@ -9,7 +9,8 @@ class App extends React.Component {
         super(props);
 
         this.state = {
-            currentPosition: undefined
+            currentPosition: undefined,
+            currentCityWeatherData: undefined
         }
 
     }
@@ -21,6 +22,22 @@ class App extends React.Component {
             })
         }, error => {
             console.log(error)
+        })
+    }
+
+    getCityWeatherData(cityName) {
+        Axios.get('/weatherData', {
+            params: {
+                city: cityName
+            }
+        })
+        .then(response => {
+            this.setState({
+                currentCityWeatherData: response.data.main
+            })
+        })
+        .catch(error => {
+            console.log('error fetching data');
         })
     }
 
@@ -38,8 +55,8 @@ class App extends React.Component {
                 </div>
 
                 <div>
-                    <input type="text"></input>
-                    <button>Get Weather Data</button>
+                    <input type="text" id='cityNameInput'></input>
+                    <button onClick={() => {this.getCityWeatherData(document.getElementById('cityNameInput').value)}}>Get Weather Data</button>
                 </div>
 
                 <div>
