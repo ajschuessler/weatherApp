@@ -1,0 +1,20 @@
+#currentCityHeader {
+    color: red;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+#cityNameInputContainer {
+    margin-bottom: 20px;
+}
+
+#cityCoordinatesInputContainer {
+    margin-bottom: 20px;
+}
+
+#weatherStatsContainer {
+    border-style: solid;
+    border-color: black;
+    width: 300px;
+    border-width: 2px;
+}
