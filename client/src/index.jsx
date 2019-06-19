@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Axios from 'axios';
+import WeatherByCitySection from './weatherByCitySection.jsx';
 
 
 
@@ -10,8 +11,12 @@ class App extends React.Component {
 
         this.state = {
             currentPosition: undefined,
-            currentCityWeatherData: undefined
+            currentCityTemp: 'NA',
+            currentCityPressure: 'NA',
+            currentCityHumidity: 'NA'
         }
+
+        this.getCityWeatherData = this.getCityWeatherData.bind(this);
 
     }
 
@@ -33,7 +38,9 @@ class App extends React.Component {
         })
         .then(response => {
             this.setState({
-                currentCityWeatherData: response.data.main
+                currentCityTemp: response.data.main.temp,
+                currentCityPressure: response.data.main.pressure,
+                currentCityHumidity: response.data.main.humidity
             })
         })
         .catch(error => {
@@ -49,33 +56,7 @@ class App extends React.Component {
     render() {
         return (
             <div>
-
-                <div>
-                    Get Weather Data by City
-                </div>
-
-                <div>
-                    <input type="text" id='cityNameInput'></input>
-                    <button onClick={() => {this.getCityWeatherData(document.getElementById('cityNameInput').value)}}>Get Weather Data</button>
-                </div>
-
-                <div>
-                    {'return weather data here'}
-                </div>
-
-                <div>
-                    Get Weather Data by coordinates
-                </div>
-
-                <div>
-                    <input type="text"></input>
-                    <input type="text"></input>
-                    <button>Get Weather Data</button>
-                </div>
-
-                <div>
-                    {'return weather data here'}
-                </div>
+                <WeatherByCitySection getCityWeatherData={this.getCityWeatherData} currentCityTemp={this.state.currentCityTemp} currentCityPressure={this.state.currentCityPressure} currentCityHumidity={this.state.currentCityHumidity}/>
                 
             </div>
         )
