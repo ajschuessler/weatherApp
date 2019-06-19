@@ -32,7 +32,34 @@ class App extends React.Component {
     render() {
         return (
             <div>
-                <button onClick={() => console.log(this.state.currentPosition.coords.latitude)}>check state</button>
+
+                <div>
+                    Get Weather Data by City
+                </div>
+
+                <div>
+                    <input type="text"></input>
+                    <button>Get Weather Data</button>
+                </div>
+
+                <div>
+                    {'return weather data here'}
+                </div>
+
+                <div>
+                    Get Weather Data by coordinates
+                </div>
+
+                <div>
+                    <input type="text"></input>
+                    <input type="text"></input>
+                    <button>Get Weather Data</button>
+                </div>
+
+                <div>
+                    {'return weather data here'}
+                </div>
+                
             </div>
         )
     }
