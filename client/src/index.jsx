@@ -10,12 +10,12 @@ class App extends React.Component {
         super(props);
 
         this.state = {
-            currentCity: 'NA',
-            currentLatitude: 'NA',
-            currentLongitude: 'NA',
-            currentCityTemp: 'NA',
-            currentCityPressure: 'NA',
-            currentCityHumidity: 'NA'
+            currentCity: 'Loading Current City...',
+            currentLatitude: '',
+            currentLongitude: '',
+            currentCityTemp: '',
+            currentCityPressure: '',
+            currentCityHumidity: ''
         }
 
         this.getCityWeatherDataByCityName = this.getCityWeatherDataByCityName.bind(this);
@@ -47,6 +47,7 @@ class App extends React.Component {
         })
         .then(response => {
             this.setState({
+                currentCity: response.data.name,
                 currentCityTemp: response.data.main.temp,
                 currentCityPressure: response.data.main.pressure,
                 currentCityHumidity: response.data.main.humidity
