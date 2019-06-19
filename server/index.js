@@ -9,7 +9,7 @@ var config = require('../config.js');
 app.use(express.static(path.join(__dirname, '/../client/dist')));
 
 
-app.get('/weatherData', (req, res) => {
+app.get('/weatherDataByCityName', (req, res) => {
     Axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${req.query.city}&APPID=${config.weatherAPIKey}`)
     .then(results => res.send(results.data))
     .catch(error => console.log(error))

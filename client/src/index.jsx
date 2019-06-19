@@ -10,6 +10,7 @@ class App extends React.Component {
         super(props);
 
         this.state = {
+            currentCity: 'NA',
             currentLatitude: 'NA',
             currentLongitude: 'NA',
             currentCityTemp: 'NA',
@@ -20,6 +21,10 @@ class App extends React.Component {
         this.getCityWeatherDataByCityName = this.getCityWeatherDataByCityName.bind(this);
         this.getCityWeatherDataByCityCoordinates = this.getCityWeatherDataByCityCoordinates.bind(this);
 
+    }
+
+    componentDidMount() {
+        this.getUserLocation();
     }
 
     getUserLocation() {
@@ -35,7 +40,7 @@ class App extends React.Component {
     }
 
     getCityWeatherDataByCityName(cityName) {
-        Axios.get('/weatherData', {
+        Axios.get('/weatherDataByCityName', {
             params: {
                 city: cityName
             }
@@ -61,6 +66,7 @@ class App extends React.Component {
         })
         .then(response => {
             this.setState({
+                currentCity: response.data.name,
                 currentCityTemp: response.data.main.temp,
                 currentCityPressure: response.data.main.pressure,
                 currentCityHumidity: response.data.main.humidity
@@ -72,16 +78,11 @@ class App extends React.Component {
     }
 
 
-
-    componentDidMount() {
-        this.getUserLocation();
-    }
-
-
     render() {
         return (
             <div>
                 <WeatherByCitySection 
+                currentCity={this.state.currentCity}
                 currentLatitude={this.state.currentLatitude}
                 currentLongitude={this.state.currentLongitude} 
                 getCityWeatherDataByCityName={this.getCityWeatherDataByCityName} 

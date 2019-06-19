@@ -16,7 +16,7 @@ class WeatherByCitySection extends React.Component {
         return (
         
             <div>
-                <div>Current Coordinates are {this.props.currentLatitude}, {this.props.currentLongitude}</div>
+                <div>You are in {this.props.currentCity}</div>
 
                 <div>
                     <input type="text" id='cityNameInput'></input>
