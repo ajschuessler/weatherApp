@@ -9,19 +9,31 @@ class App extends React.Component {
         super(props);
 
         this.state = {
-
+            currentPosition: undefined
         }
 
     }
 
-    componentDidMount() {
+    getUserLocation() {
+        navigator.geolocation.getCurrentPosition(position => {
+            this.setState({
+                currentPosition: position
+            })
+        }, error => {
+            console.log(error)
+        })
+    }
 
+    componentDidMount() {
+        this.getUserLocation();
     }
 
 
     render() {
         return (
-            <div>Weather App</div>
+            <div>
+                <button onClick={() => console.log(this.state.currentPosition.coords.latitude)}>check state</button>
+            </div>
         )
     }
 }
