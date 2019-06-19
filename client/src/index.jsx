@@ -27,7 +27,8 @@ class App extends React.Component {
             this.setState({
                 currentLatitude: position.coords.latitude,
                 currentLongitude: position.coords.longitude
-            })
+            });
+            this.getCityWeatherDataByCityCoordinates(position.coords.latitude, position.coords.longitude);
         }, error => {
             console.log(error)
         })
