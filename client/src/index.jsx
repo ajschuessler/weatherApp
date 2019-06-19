@@ -16,7 +16,8 @@ class App extends React.Component {
             currentCityHumidity: 'NA'
         }
 
-        this.getCityWeatherData = this.getCityWeatherData.bind(this);
+        this.getCityWeatherDataByCityName = this.getCityWeatherDataByCityName.bind(this);
+        this.getCityWeatherDataByCityCoordinates = this.getCityWeatherDataByCityCoordinates.bind(this);
 
     }
 
@@ -30,7 +31,7 @@ class App extends React.Component {
         })
     }
 
-    getCityWeatherData(cityName) {
+    getCityWeatherDataByCityName(cityName) {
         Axios.get('/weatherData', {
             params: {
                 city: cityName
@@ -48,6 +49,27 @@ class App extends React.Component {
         })
     }
 
+    getCityWeatherDataByCityCoordinates(latitude, longitude) {
+        Axios.get('/weatherDataByCoordinates', {
+            params: {
+                latitude: latitude,
+                longitude: longitude
+            }
+        })
+        .then(response => {
+            this.setState({
+                currentCityTemp: response.data.main.temp,
+                currentCityPressure: response.data.main.pressure,
+                currentCityHumidity: response.data.main.humidity
+            })
+        })
+        .catch(error => {
+            console.log('error fetching data');
+        })
+    }
+
+
+
     componentDidMount() {
         this.getUserLocation();
     }
@@ -56,7 +78,7 @@ class App extends React.Component {
     render() {
         return (
             <div>
-                <WeatherByCitySection getCityWeatherData={this.getCityWeatherData} currentCityTemp={this.state.currentCityTemp} currentCityPressure={this.state.currentCityPressure} currentCityHumidity={this.state.currentCityHumidity}/>
+                <WeatherByCitySection getCityWeatherDataByCityName={this.getCityWeatherDataByCityName} getCityWeatherDataByCityCoordinates={this.getCityWeatherDataByCityCoordinates} currentCityTemp={this.state.currentCityTemp} currentCityPressure={this.state.currentCityPressure} currentCityHumidity={this.state.currentCityHumidity}/>
                 
             </div>
         )

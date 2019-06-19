@@ -10,13 +10,17 @@ app.use(express.static(path.join(__dirname, '/../client/dist')));
 
 
 app.get('/weatherData', (req, res) => {
-    // console.log(req.query.city);
-    // console.log(config.weatherAPIKey);
-
     Axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${req.query.city}&APPID=${config.weatherAPIKey}`)
     .then(results => res.send(results.data))
     .catch(error => console.log(error))
 
+})
+
+app.get('/weatherDataByCoordinates', (req, res) => {
+    Axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=${req.query.latitude}&lon=${req.query.longitude}&APPID=${config.weatherAPIKey}`)
+    .then(results => res.send(results.data))
+    .catch(error => console.log(error))
+    
 })
 
 app.listen(port, () => {

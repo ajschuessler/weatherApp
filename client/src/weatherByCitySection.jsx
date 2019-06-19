@@ -19,12 +19,13 @@ class WeatherByCitySection extends React.Component {
 
                 <div>
                     <input type="text" id='cityNameInput'></input>
-                    <button onClick={() => {this.props.getCityWeatherData(document.getElementById('cityNameInput').value)}}>Get Weather Data by City Name</button>
+                    <button onClick={() => {this.props.getCityWeatherDataByCityName(document.getElementById('cityNameInput').value)}}>Get Weather Data by City Name</button>
                 </div>
 
                 <div>
-                    <input type="text" id='cityCoordinatesInput'></input>
-                    <button onClick={() => {this.props.getCityWeatherData(document.getElementById('cityNameInput').value)}}>Get Weather Data by City Coordinates</button>
+                    <input type="text" id='cityLatitudeInput'></input>
+                    <input type="text" id='cityLongitudeInput'></input>
+                    <button onClick={() => {this.props.getCityWeatherDataByCityCoordinates(document.getElementById('cityLatitudeInput').value, document.getElementById('cityLongitudeInput').value)}}>Get Weather Data by City Coordinates</button>
                 </div>
 
                 <div>Temperature: {this.props.currentCityTemp} (Kelvin), </div>
